@@ -13,7 +13,6 @@ const parseDatabaseUrl = (url) => {
   };
 };
 
-
 module.exports = {
   development: process.env.DATABASE_URL ? parseDatabaseUrl(process.env.DATABASE_URL) : {
     username: 'root',

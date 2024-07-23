@@ -6,8 +6,7 @@ const sendMail = require('../helper/sendMail');
 const cron = require('node-cron');
 // Signup function
 exports.signup = async (req, res) => {
-  console.log("body", req.body)
-  console.log("name",req.name,req.email, req.password);
+
   const transaction = await User.sequelize.transaction();
   try {
     // Extract user input from request body
@@ -21,9 +20,6 @@ exports.signup = async (req, res) => {
       return res.status(400).json({ message: 'Email is already registered' });
     }
 
-    
-    
-    
     // Create a new user in the database
     const newUser = await User.create({ email, password_hash: password,name : name}, { transaction });
     await newUser.validate();
