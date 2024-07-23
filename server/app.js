@@ -3,7 +3,7 @@ const bodyparser = require('body-parser')
 const app =  express();
 const cors = require("cors")
 app.use(cors({
-    origin: "http://localhost:3001"
+    origin: "https://campusfusion.vercel.app"
 }))
 require('dotenv').config();
 const userRoute =  require('./routes/user')
