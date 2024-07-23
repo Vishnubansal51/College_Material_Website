@@ -28,13 +28,13 @@ require('dotenv').config();
 const app = express();
 
 const allowedOrigins = [
-    "https://campusfusion.vercel.app", // Frontend URL
-    "https://college-material-website.onrender.com" // Backend URL on Render
+    'https://campusfusion.vercel.app',
+    'https://college-material-website.onrender.com' 
 ];
 
 app.use(cors({
     origin: function(origin, callback) {
-        // Allow requests with no origin (like mobile apps, Postman)
+      
         if (!origin) return callback(null, true);
         if (allowedOrigins.indexOf(origin) === -1) {
             const msg = 'The CORS policy for this site does not allow access from the specified origin.';
