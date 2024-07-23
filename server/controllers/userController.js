@@ -58,7 +58,7 @@ exports.signup = async (req, res) => {
     // Return success response with JWT token
  res.status(201).json({ message: 'Signup successful! Check your email for verification. ', token });
   } catch (error) {
-    console.log("error".error.message)
+    console.log("error",error.message)
     await transaction.rollback();
 
     if (error.name === 'SequelizeValidationError') {
