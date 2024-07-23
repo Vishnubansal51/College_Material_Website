@@ -12,6 +12,7 @@ const parseDatabaseUrl = (url) => {
     timezone: '+05:30'
   };
 };
+console.log(process.env.DATABASE_URL);
 
 module.exports = {
   development: process.env.DATABASE_URL ? parseDatabaseUrl(process.env.DATABASE_URL) : {
@@ -40,3 +41,8 @@ module.exports = {
     dialect: 'mysql'
   }
 };
+console.log(process.env.DATABASE_URL);
+console.log(password)
+
+console.log(host);
+console.log(port)
