@@ -1,0 +1,34 @@
+/* :root {
+    --background-color: #fff;
+    --text-color: #000;
+    --navbar-bg: #f8f9fa;
+    --button-bg: #007bff;
+    --button-text: #fff;
+  }
+  
+  [data-theme="dark"] {
+    --background-color: #121212;
+    --text-color: #e0e0e0;
+    --navbar-bg: #333;
+    --button-bg: #bb86fc;
+    --button-text: #000;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .navbar {
+    background-color: var(--navbar-bg);
+  }
+  
+  .btn-primary {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+  }
+  
+  .btn-primary:hover {
+    background-color: darken(var(--button-bg), 10%);
+  }
+   */
