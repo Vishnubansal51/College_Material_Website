@@ -12,7 +12,7 @@ const parseDatabaseUrl = (url) => {
     timezone: '+05:30'
   };
 };
-console.log(process.env.DATABASE_URL); // added console
+
 
 module.exports = {
   development: process.env.DATABASE_URL ? parseDatabaseUrl(process.env.DATABASE_URL) : {
