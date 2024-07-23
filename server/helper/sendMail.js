@@ -74,9 +74,9 @@ const sendMail = async (email, mailSubject, token) => {
 
         transport.sendMail(mailOptions, function (error, info) {
             if (error) {
-                // console.log("error", error.message);
+                console.log("error", error.message);
             } else {
-                // console.log('mail is sent successfully', info.response);
+                console.log('mail is sent successfully', info.response);
             }
         });
     } catch (error) {
