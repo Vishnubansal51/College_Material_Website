@@ -14,7 +14,7 @@ exports.signup = async (req, res) => {
     
     // Check if the email is already registered
     const existingUser = await User.findOne({ where: { email } });
-    console.log( "existingUser",existingUser)
+
     if (existingUser) {
       await transaction.rollback();
       return res.status(400).json({ message: 'Email is already registered' });
@@ -22,7 +22,7 @@ exports.signup = async (req, res) => {
     
     // Create a new user in the database
     const newUser = await User.create({ email, password_hash: password,name : name}, { transaction });
-    console.log("newUser",newUser)
+ 
     await newUser.validate();
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -30,8 +30,7 @@ exports.signup = async (req, res) => {
     // Generate a JWT token
     // console.log("token", process.env.Secret_token)
     const token = jwt.sign({ userId: newUser.id, email: newUser.email },process.env.Secret_token, { expiresIn: '1d' });
-    
-    console.log("token",token)
+
     newUser.verification_token = token;
     // await newUser.save();
     // console.log(newUser.verification_token  ,"token")
@@ -45,7 +44,7 @@ exports.signup = async (req, res) => {
     
     // sendMail(req.body.email,mailSubject,content);
     const mailSent = await sendMail(email, mailSubject, token);
-    console.log("mail",mailSent)
+
     // console.log("vs",mailSent)
     // if (!mailSent) {
     //   await transaction.rollback();
@@ -58,7 +57,7 @@ exports.signup = async (req, res) => {
     // Return success response with JWT token
  res.status(201).json({ message: 'Signup successful! Check your email for verification. ', token });
   } catch (error) {
-    console.log("error",error.message)
+
     await transaction.rollback();
 
     if (error.name === 'SequelizeValidationError') {
@@ -152,6 +151,9 @@ exports.verifyEmail = async (req, res) => {
 
     try {
       decodedToken = jwt.verify(token, process.env.Secret_token);
+      console.log("dec",decodedToken)
+      console.log("process.env.Secret_token",process.env.Secret_token)
+
     } catch (err) {
       return res.render('mail-verification', { message: 'Invalid or expired token.' });
     }
@@ -182,7 +184,7 @@ exports.verifyEmail = async (req, res) => {
   } catch (error) {
     // console.error('Error verifying email:', error);
     // return res.status(500).json({ message: 'Internal server error' });
-
+    console.log("error",error.message)
     return res.render('mail-verification', { message: 'Internal server error' })
   }
 };
