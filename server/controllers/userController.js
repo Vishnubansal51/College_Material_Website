@@ -12,16 +12,17 @@ exports.signup = async (req, res) => {
     // Extract user input from request body
     const { email, password,name } = req.body;
     
-
     // Check if the email is already registered
     const existingUser = await User.findOne({ where: { email } });
+    console.log(existingUser)
     if (existingUser) {
       await transaction.rollback();
       return res.status(400).json({ message: 'Email is already registered' });
     }
-
+    
     // Create a new user in the database
     const newUser = await User.create({ email, password_hash: password,name : name}, { transaction });
+    console.log(newUser)
     await newUser.validate();
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,20 +30,22 @@ exports.signup = async (req, res) => {
     // Generate a JWT token
     // console.log("token", process.env.Secret_token)
     const token = jwt.sign({ userId: newUser.id, email: newUser.email },process.env.Secret_token, { expiresIn: '1d' });
-
+    
+    console.log(token)
     newUser.verification_token = token;process.env.Secret_token
     // await newUser.save();
     // console.log(newUser.verification_token  ,"token")
-   
+    
     
     // Sending mail content
     let mailSubject='Mail Verification';
     // let content = '<p>Hii '+ req.body.name +', \ Please <a href = "http://127.0.0.1:3000/mail-verification?token='+token+'">Verify </a> your Mail!';
-
+    
     // let content = '<p>Hii ' + req.body.name + ', Please <a href="http://127.0.0.1:3000/mail-verification?token=' + token + '">Verify</a> your Mail!</p>';
-
+    
     // sendMail(req.body.email,mailSubject,content);
     const mailSent = await sendMail(email, mailSubject, token);
+    console.log(mailSent)
     // console.log("vs",mailSent)
     // if (!mailSent) {
     //   await transaction.rollback();
@@ -55,6 +58,7 @@ exports.signup = async (req, res) => {
     // Return success response with JWT token
  res.status(201).json({ message: 'Signup successful! Check your email for verification. ', token });
   } catch (error) {
+    console.log(error.message)
     await transaction.rollback();
 
     if (error.name === 'SequelizeValidationError') {
