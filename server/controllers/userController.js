@@ -6,7 +6,7 @@ const sendMail = require('../helper/sendMail');
 const cron = require('node-cron');
 // Signup function
 exports.signup = async (req, res) => {
-  console("body", req.body)
+  console.log("body", req.body)
   console.log("name",req.name,req.email, req.password);
   const transaction = await User.sequelize.transaction();
   try {
