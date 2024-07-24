@@ -75,11 +75,9 @@ const sendMail = async (email, mailSubject, token) => {
 
         transport.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(mailOptions.from);
-                console.log(SMTP_PASSWORD)
-                console.log("error", error.message);
+                
             } else {
-                console.log('mail is sent successfully', info.response);
+             
             }
         });
     } catch (error) {

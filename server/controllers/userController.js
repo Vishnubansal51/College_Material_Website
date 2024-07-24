@@ -151,8 +151,7 @@ exports.verifyEmail = async (req, res) => {
 
     try {
       decodedToken = jwt.verify(token, process.env.Secret_token);
-      console.log("dec",decodedToken)
-      console.log("process.env.Secret_token",process.env.Secret_token)
+     
 
     } catch (err) {
       return res.render('mail-verification', { message: 'Invalid or expired token.' });
@@ -184,7 +183,6 @@ exports.verifyEmail = async (req, res) => {
   } catch (error) {
     // console.error('Error verifying email:', error);
     // return res.status(500).json({ message: 'Internal server error' });
-    console.log("error",error.message)
     return res.render('mail-verification', { message: 'Internal server error' })
   }
 };

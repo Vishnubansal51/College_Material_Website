@@ -30,6 +30,7 @@ const app = express();
 const allowedOrigins = [
     'https://campusfusion.vercel.app',
     'https://college-material-website.onrender.com',
+    'https://college-material-website-test.vercel.app'
 ];
 
 app.use(cors({
@@ -55,7 +56,7 @@ app.use('/', webRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
+   
     res.status(500).send('Something broke!');
 });
 
