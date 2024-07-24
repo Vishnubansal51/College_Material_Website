@@ -30,7 +30,6 @@ const app = express();
 const allowedOrigins = [
     'https://campusfusion.vercel.app',
     'https://college-material-website.onrender.com',
-    "http://localhost:3000"
 ];
 
 app.use(cors({
